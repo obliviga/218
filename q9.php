@@ -1,17 +1,72 @@
 <a href="college.php">Back</a><br>
-<h3>See Top 5 colleges based on clicked Statistic:</h3>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getPercentLiab">Percent increase in total liabilities</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getPercentEnroll">Percent increase in enrollment</a><br>
+<h3>Compare Top 5 colleges based on clicked Statistic:</h3>
+<a href="http://mywebclass.org/~ak557/test.php?f=getInstitution">Institution</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getEnrollment">Enrollment</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getTotLiab">Total Liabilities</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getNetAssets">Net Assets</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getTotRev">Total Revenues</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getTotRevPS">Total Revenues per Student</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getNetAssetsPS">Net Assets per Student</a>
+<a href="http://mywebclass.org/~ak557/test.php?f=getTotLiabPS">Total Liabilities per Student</a>
+<br>
 <?php
 if(function_exists($_GET['f'])) {
    $_GET['f']();
+}
+function getInstitution() {
+	$host='localhost';
+	$dbname='ak557';
+	$user='ak557';
+	$pass='ak557$1234';
+	try {
+	  # MySQL with PDO_MYSQL
+	  $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+	}
+	catch(PDOException $e) {
+	    echo $e->getMessage();
+	}
+	
+	$enrollment = $DBH->query('
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
+	FROM colleges
+	INNER JOIN enrollment_10
+	ON colleges.UNITID = enrollment_10.UNITID
+	INNER JOIN fin_10
+	ON enrollment_10.UNITID = fin_10.UNITID
+	GROUP BY INSTNM
+	LIMIT 5
+	');
+	
+	# setting the fetch mode
+	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
+	
+	while($row = $enrollment->fetch()) {
+		echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
+	}
 }
 
 function getEnrollment() {
@@ -28,10 +83,13 @@ function getEnrollment() {
 	}
 	
 	$enrollment = $DBH->query('
-	SELECT DISTINCT INSTNM, EFYTOTLT
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
 	INNER JOIN enrollment_10
 	ON colleges.UNITID = enrollment_10.UNITID
+	INNER JOIN fin_10
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
 	ORDER BY EFYTOTLT DESC
 	LIMIT 5
@@ -41,8 +99,30 @@ function getEnrollment() {
 	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $enrollment->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['EFYTOTLT'] . "<br>";
+			echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 echo "<br>";
@@ -61,10 +141,13 @@ function getTotLiab() {
 	}
 	
 	$totLiab = $DBH->query('
-	SELECT DISTINCT INSTNM, F1A13
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
+	INNER JOIN enrollment_10
+	ON colleges.UNITID = enrollment_10.UNITID
 	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
 	ORDER BY F1A13 DESC
 	LIMIT 5
@@ -74,8 +157,30 @@ function getTotLiab() {
 	$totLiab->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $totLiab->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['F1A13'] . "<br>";
+			echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 echo "<br>";
@@ -93,10 +198,13 @@ function getNetAssets() {
 	}
 	
 	$netAss = $DBH->query('
-	SELECT DISTINCT INSTNM, F1A18
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
+	INNER JOIN enrollment_10
+	ON colleges.UNITID = enrollment_10.UNITID
 	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
 	ORDER BY F1A18 DESC
 	LIMIT 5
@@ -106,8 +214,30 @@ function getNetAssets() {
 	$netAss->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $netAss->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['F1A18'] . "<br>";
+		echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 
@@ -126,10 +256,13 @@ function getTotRev() {
 	}
 	
 	$totalRev = $DBH->query('
-	SELECT DISTINCT INSTNM, F1B25
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
+	INNER JOIN enrollment_10
+	ON colleges.UNITID = enrollment_10.UNITID
 	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
 	ORDER BY F1B25 DESC
 	LIMIT 5
@@ -139,8 +272,30 @@ function getTotRev() {
 	$totalRev->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $totalRev->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['F1B25'] . "<br>";
+			echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 echo "<br>";
@@ -159,14 +314,15 @@ function getTotRevPS() {
 	}
 	
 	$totalRevPS = $DBH->query('
-	SELECT INSTNM, (fin_10.F1B25/enrollment_10.EFYTOTLT) as test
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
-	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
 	INNER JOIN enrollment_10
-	ON fin_10.UNITID = enrollment_10.UNITID
+	ON colleges.UNITID = enrollment_10.UNITID
+	INNER JOIN fin_10
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
-	ORDER BY test desc
+	ORDER BY totrevPS DESC
 	LIMIT 5
 	');
 	
@@ -174,8 +330,30 @@ function getTotRevPS() {
 	$totalRevPS->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $totalRevPS->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['test'] . "<br>";
+		echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 echo "<br>";
@@ -193,14 +371,15 @@ function getNetAssetsPS() {
 	}
 	
 	$netAssPS = $DBH->query('
-	SELECT INSTNM, (fin_10.F1A18/enrollment_10.EFYTOTLT) as test
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
-	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
 	INNER JOIN enrollment_10
-	ON fin_10.UNITID = enrollment_10.UNITID
+	ON colleges.UNITID = enrollment_10.UNITID
+	INNER JOIN fin_10
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
-	ORDER BY test desc
+	ORDER BY totnetassPS DESC
 	LIMIT 5
 	');
 	
@@ -208,8 +387,30 @@ function getNetAssetsPS() {
 	$netAssPS->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $netAssPS->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['test'] . "<br>";
+echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 
@@ -229,14 +430,15 @@ function getTotLiabPS() {
 	}
 	
 	$totLiabPS = $DBH->query('
-	SELECT INSTNM, (fin_10.F1A13/enrollment_10.EFYTOTLT) as test
+	SELECT DISTINCT INSTNM, EFYTOTLT, F1A13, F1A18, F1B25, (fin_10.F1B25/enrollment_10.EFYTOTLT) as totrevPS, 
+	(fin_10.F1A18/enrollment_10.EFYTOTLT) as totnetassPS, (fin_10.F1A13/enrollment_10.EFYTOTLT) as totLiabPS
 	FROM colleges
-	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
 	INNER JOIN enrollment_10
-	ON fin_10.UNITID = enrollment_10.UNITID
+	ON colleges.UNITID = enrollment_10.UNITID
+	INNER JOIN fin_10
+	ON enrollment_10.UNITID = fin_10.UNITID
 	GROUP BY INSTNM
-	ORDER BY test desc
+	ORDER BY totLiabPS DESC
 	LIMIT 5
 	');
 	
@@ -244,78 +446,30 @@ function getTotLiabPS() {
 	$totLiabPS->setFetchMode(PDO::FETCH_ASSOC);
 	
 	while($row = $totLiabPS->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['test'] . "<br>";
-	}
-}
-
-echo "<br>";
-
-function getPercentLiab() {
-	$host='localhost';
-	$dbname='ak557';
-	$user='ak557';
-	$pass='ak557$1234';
-	try {
-	  # MySQL with PDO_MYSQL
-	  $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-	}
-	catch(PDOException $e) {
-	    echo $e->getMessage();
-	}
-	
-	$percentEnrollment = $DBH->query('
-	SELECT INSTNM, (SUM(fin_11.F1A13-fin_10.F1A13))/fin_10.F1A13 as test
-	FROM colleges
-	INNER JOIN fin_10
-	ON colleges.UNITID = fin_10.UNITID
-	INNER JOIN fin_11
-	ON fin_10.UNITID = fin_11.UNITID
-	GROUP BY INSTNM
-	ORDER BY test DESC 
-	LIMIT 5
-	');
-	
-	# setting the fetch mode
-	$percentEnrollment->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $percentEnrollment->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['test'] . "%" . "<br>";
-	}
-}
-echo "<br>";
-function getPercentEnroll() {
-	$host='localhost';
-	$dbname='ak557';
-	$user='ak557';
-	$pass='ak557$1234';
-	try {
-	  # MySQL with PDO_MYSQL
-	  $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-	}
-	catch(PDOException $e) {
-	    echo $e->getMessage();
-	}
-	
-	$percentEnrollment = $DBH->query('
-	SELECT INSTNM, (SUM(enrollment_10.EFYTOTLT-enrollment_11.EFYTOTLT))/enrollment_10.EFYTOTLT as test
-	FROM colleges
-	INNER JOIN enrollment_10
-	ON colleges.UNITID = enrollment_10.UNITID
-	INNER JOIN enrollment_11
-	ON enrollment_10.UNITID = enrollment_11.UNITID
-	GROUP BY INSTNM
-	ORDER BY test DESC 
-	LIMIT 5
-	');
-	
-	# setting the fetch mode
-	$percentEnrollment->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $percentEnrollment->fetch()) {
-		echo $row['INSTNM'] . ":" . "\n";
-	    echo $row['test'] . "%" . "<br>";
+		echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Institution</th>
+			  <th>Enrollment</th>
+			  <th>Total Liabilities</th>
+			  <th>Net Assets</th>
+			  <th>Total Revenues</th>
+			  <th>Total Revenues per Student</th>
+			  <th>Net Assets per Student</th>
+			  <th>Total Liabilities per Student</th>
+			</tr>";
+			echo "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['INSTNM'] . "</th>";
+			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+				echo "<th>" . $row['F1A13'] . "</th>";
+				echo "<th>" . $row['F1A18'] . "</th>";
+				echo "<th>" . $row['F1B25'] . "</th>";
+				echo "<th>" . $row['totrevPS'] . "</th>";
+				echo "<th>" . $row['totnetassPS'] . "</th>";
+				echo "<th>" . $row['totLiabPS'] . "</th>";
+			echo "</tr>";
+		echo "</table>";
 	}
 }
 ?>

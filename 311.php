@@ -1,8 +1,6 @@
-<a href="college.php">Back</a><br>
 
+<h4>A list of URLs from the MSN homepage:</h4>
 <?php
-$abbr = mysql_real_escape_string($_POST['STABBR']);
-
 $host='localhost';
 $dbname='ak557';
 $user='ak557';
@@ -15,19 +13,16 @@ catch(PDOException $e) {
     echo $e->getMessage();
 }
 
-$STH = $DBH->query("
-SELECT INSTNM, STABBR
-FROM colleges
-WHERE STABBR ='$abbr'
-");
+$STH = $DBH->query('
+SELECT CHILDREN,PARENT
+FROM urls
+');
 
 # setting the fetch mode
 $STH->setFetchMode(PDO::FETCH_ASSOC);
 
 while($row = $STH->fetch()) {
-	echo $row['INSTNM'] . "\n";
-    echo $row['STABBR'] . "<br>";
+	echo $row['CHILDREN'] . "\n";
+    echo $row['PARENT'] . "<br>";
 }
-
-
 ?>

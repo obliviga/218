@@ -25,18 +25,18 @@ abstract class questions {
     function menu() {
     $menu = '<a href="./college.php">Homepage</a><br>';
     $menu .= '<a href="./college.php?questions=q1">Question 1</a><br>';
-		$menu .= '<a href="./college.php?questions=q2">Question 2</a><br>';
-		$menu .= '<a href="./college.php?questions=q3">Question 3</a><br>';
-		$menu .= '<a href="./college.php?questions=q4">Question 4</a><br>';
-		$menu .= '<a href="./college.php?questions=q5">Question 5</a><br>';
-		$menu .= '<a href="./college.php?questions=q6">Question 6</a><br>';
-		$menu .= '<a href="./college.php?questions=q7">Question 7</a><br>';
-		$menu .= '<a href="./college.php?questions=q8">Question 8</a><br>';
-		$menu .= '<a href="./q9.php">Question 9</a><br>';
-		$menu .= '<a href="./college.php?questions=q10">Question 10</a><br>';
-		$menu .= '<a href="./college.php?questions=q11">Question 11</a><br>';
-		$menu .= '<a href="./college.php?questions=q12">Question 12</a><br>';
-        return $menu;
+	$menu .= '<a href="./college.php?questions=q2">Question 2</a><br>';
+	$menu .= '<a href="./college.php?questions=q3">Question 3</a><br>';
+	$menu .= '<a href="./college.php?questions=q4">Question 4</a><br>';
+	$menu .= '<a href="./college.php?questions=q5">Question 5</a><br>';
+	$menu .= '<a href="./college.php?questions=q6">Question 6</a><br>';
+	$menu .= '<a href="./college.php?questions=q7">Question 7</a><br>';
+	$menu .= '<a href="./college.php?questions=q8">Question 8</a><br>';
+	$menu .= '<a href="./q9.php">Question 9</a><br>';
+	$menu .= '<a href="./college.php?questions=q10">Question 10</a><br>';
+	$menu .= '<a href="./college.php?questions=q11">Question 11</a><br>';
+	$menu .= '<a href="./college.php?questions=q12">Question 12</a><br>';
+    return $menu;
     }
     
     function __construct($arg = NULL) {
@@ -67,7 +67,10 @@ class homepage extends questions {
 
 class q1 extends questions {
 		function html() {
-			echo "<h3>Colleges that have the highest enrollment:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges that have the highest enrollment:</h3>
+			";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -114,7 +117,9 @@ class q1 extends questions {
 
 class q2 extends questions {
 		function html() {
-			echo "Colleges with the largest amount of total liabilties:";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of total liabilties:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -159,7 +164,9 @@ class q2 extends questions {
 
 class q3 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of net assets:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of net assets:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -205,7 +212,9 @@ class q3 extends questions {
 
 class q4 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of net assets:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of net assets:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -251,7 +260,9 @@ class q4 extends questions {
 
 class q5 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of total revenues:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of total revenues:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -286,7 +297,7 @@ class q5 extends questions {
 		
 		while($row = $STH->fetch()) {
 			echo $row['INSTNM'] . ":" . "\n";
-		    echo $row['F1B25'] . "<br>";
+		    echo "$" . $row['F1B25'] . "<br>";
 		}
     }
 	
@@ -297,7 +308,9 @@ class q5 extends questions {
 
 class q6 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of total revenue per student:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of total revenue per student:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -334,7 +347,7 @@ class q6 extends questions {
 		
 		while($row = $STH->fetch()) {
 		    echo $row['INSTNM'] . ":" . "\n";
-		    echo $row['test'] . "<br>";
+		    echo "$" .  $row['test'] . "<br>";
 		}
     }
 	
@@ -345,7 +358,9 @@ class q6 extends questions {
 
 class q7 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of net assets per student:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of net assets per student:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -393,7 +408,9 @@ class q7 extends questions {
 
 class q8 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest amount of total liabilties per student:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest amount of total liabilties per student:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -441,7 +458,9 @@ class q8 extends questions {
 
 class q9 extends questions {
 		function html() {
-			echo "<h3>Top 5 Colleges based on previous stats:</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Top 5 Colleges based on previous stats:</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -459,19 +478,22 @@ class q9 extends questions {
 }
 
 class q10 extends questions {
-		function html() {
-			echo "<h3>string</h3>";
-		}
+
     function get() {
         $this->content .= $this->menu();
-		$this->content .= $this->html();
-        $this->content .= $this->getAbbr();
+		$this->content .= $this->getAbbr();
     }
 	
     function getAbbr() {
-		include 'q10.php';
+    	echo '
+		<h3>Enter in a state abbreviation to retrieve the colleges in that state</h3>
+		<form action="q10.php" method="post">
+			Abbreviation: <input type="text" name="STABBR"><br>
+			<input type="submit">
+		</form>
+		';	
     }
-	
+
 	function __destruct() {
         
     }
@@ -479,7 +501,9 @@ class q10 extends questions {
 
 class q11 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest percentage increase in total liabilities between 2011 and 2010</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest percentage increase in total liabilities between 2011 and 2010</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
@@ -527,7 +551,9 @@ class q11 extends questions {
 
 class q12 extends questions {
 		function html() {
-			echo "<h3>Colleges with the largest percentage increase in enrollment between 2011 and 2010</h3>";
+			echo "
+			<a href='college.php'>Back</a>
+			<h3>Colleges with the largest percentage increase in enrollment between 2011 and 2010</h3>";
 		}
     function get() {
         $this->content .= $this->menu();
