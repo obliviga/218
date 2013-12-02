@@ -1,13 +1,13 @@
 <a href="college.php">Back</a><br>
 <h3>Compare Top 5 colleges based on clicked Statistic:</h3>
-<a href="http://mywebclass.org/~ak557/test.php?f=getInstitution">Institution</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getEnrollment">Enrollment</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getTotLiab">Total Liabilities</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getNetAssets">Net Assets</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getTotRev">Total Revenues</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getTotRevPS">Total Revenues per Student</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getNetAssetsPS">Net Assets per Student</a>
-<a href="http://mywebclass.org/~ak557/test.php?f=getTotLiabPS">Total Liabilities per Student</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a>
 <br>
 <?php
 if(function_exists($_GET['f'])) {
@@ -40,9 +40,7 @@ function getInstitution() {
 	
 	# setting the fetch mode
 	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $enrollment->fetch()) {
-		echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -54,7 +52,8 @@ function getInstitution() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $enrollment->fetch()) {
+		
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -65,8 +64,9 @@ function getInstitution() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 
 function getEnrollment() {
@@ -97,9 +97,7 @@ function getEnrollment() {
 	
 	# setting the fetch mode
 	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $enrollment->fetch()) {
-			echo "<table border='1'";
+		echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -111,7 +109,7 @@ function getEnrollment() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $enrollment->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -122,8 +120,9 @@ function getEnrollment() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 echo "<br>";
 
@@ -155,9 +154,7 @@ function getTotLiab() {
 	
 	# setting the fetch mode
 	$totLiab->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $totLiab->fetch()) {
-			echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -169,7 +166,8 @@ function getTotLiab() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $totLiab->fetch()) {
+
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -180,8 +178,9 @@ function getTotLiab() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 echo "<br>";
 function getNetAssets() {
@@ -212,9 +211,7 @@ function getNetAssets() {
 	
 	# setting the fetch mode
 	$netAss->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $netAss->fetch()) {
-		echo "<table border='1'";
+			echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -226,7 +223,8 @@ function getNetAssets() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $netAss->fetch()) {
+
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -237,8 +235,9 @@ function getNetAssets() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 
 echo "<br>";
@@ -270,9 +269,7 @@ function getTotRev() {
 	
 	# setting the fetch mode
 	$totalRev->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $totalRev->fetch()) {
-			echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -284,7 +281,7 @@ function getTotRev() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $totalRev->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -295,8 +292,9 @@ function getTotRev() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 echo "<br>";
 
@@ -328,9 +326,7 @@ function getTotRevPS() {
 	
 	# setting the fetch mode
 	$totalRevPS->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $totalRevPS->fetch()) {
-		echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -342,7 +338,7 @@ function getTotRevPS() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $totalRevPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -353,8 +349,9 @@ function getTotRevPS() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 echo "<br>";
 function getNetAssetsPS() {
@@ -385,9 +382,7 @@ function getNetAssetsPS() {
 	
 	# setting the fetch mode
 	$netAssPS->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $netAssPS->fetch()) {
-echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -399,7 +394,7 @@ echo "<table border='1'";
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $netAssPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -410,8 +405,9 @@ echo "<table border='1'";
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 
 echo "<br>";
@@ -444,9 +440,7 @@ function getTotLiabPS() {
 	
 	# setting the fetch mode
 	$totLiabPS->setFetchMode(PDO::FETCH_ASSOC);
-	
-	while($row = $totLiabPS->fetch()) {
-		echo "<table border='1'";
+	echo "<table border='1'";
 			echo "
 			<tr>
 			  <th>Institution</th>
@@ -458,7 +452,7 @@ function getTotLiabPS() {
 			  <th>Net Assets per Student</th>
 			  <th>Total Liabilities per Student</th>
 			</tr>";
-			echo "<br>";
+	while($row = $totLiabPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
 			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
@@ -469,7 +463,8 @@ function getTotLiabPS() {
 				echo "<th>" . $row['totnetassPS'] . "</th>";
 				echo "<th>" . $row['totLiabPS'] . "</th>";
 			echo "</tr>";
-		echo "</table>";
+
 	}
+		echo "</table>";
 }
 ?>

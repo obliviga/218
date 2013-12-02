@@ -1,5 +1,4 @@
 <?php
-$q1="test";
 $program = new program();
 class program {
     function __construct() {

@@ -21,8 +21,19 @@ FROM urls
 # setting the fetch mode
 $STH->setFetchMode(PDO::FETCH_ASSOC);
 
+echo "<table border='1'";
+			echo "
+			<tr>
+			  <th>Child URL</th>
+			  <th>Parent URL</th>
+			</tr>";
+
 while($row = $STH->fetch()) {
-	echo $row['CHILDREN'] . "\n";
-    echo $row['PARENT'] . "<br>";
+			echo "<tr>";
+				echo "<th>" . $row['CHILDREN'] . "</th>";
+			  echo "<th>" . $row['PARENT'] . "</th>";
+			echo "</tr>";
+		
 }
+echo "</table>";
 ?>
