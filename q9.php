@@ -1,18 +1,23 @@
 <a href="college.php">Back</a><br>
-<h3>Compare Top 5 colleges based on clicked Statistic:</h3>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a>
+<h3>Click <a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">here</a> to Compare the Top 5 colleges based on clicked Statistic:</h3>
+<!-- <a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a>
 <a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a>
-<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a>
+<a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a> -->
 <br>
 <?php
 if(function_exists($_GET['f'])) {
    $_GET['f']();
 }
+
+function __construct() {
+	$this->getInstitution();
+}
+
 function getInstitution() {
 	$host='localhost';
 	$dbname='ak557';
@@ -41,17 +46,17 @@ function getInstitution() {
 	# setting the fetch mode
 	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $enrollment->fetch()) {
 		
 			echo "<tr>";
@@ -98,17 +103,17 @@ function getEnrollment() {
 	# setting the fetch mode
 	$enrollment->setFetchMode(PDO::FETCH_ASSOC);
 		echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $enrollment->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
@@ -155,17 +160,17 @@ function getTotLiab() {
 	# setting the fetch mode
 	$totLiab->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $totLiab->fetch()) {
 
 			echo "<tr>";
@@ -212,22 +217,22 @@ function getNetAssets() {
 	# setting the fetch mode
 	$netAss->setFetchMode(PDO::FETCH_ASSOC);
 			echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $netAss->fetch()) {
 
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
-			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+			  echo "<th>" . $row['EFYTOTLT'] . "</th>";
 				echo "<th>" . $row['F1A13'] . "</th>";
 				echo "<th>" . $row['F1A18'] . "</th>";
 				echo "<th>" . $row['F1B25'] . "</th>";
@@ -270,17 +275,17 @@ function getTotRev() {
 	# setting the fetch mode
 	$totalRev->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $totalRev->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
@@ -327,21 +332,21 @@ function getTotRevPS() {
 	# setting the fetch mode
 	$totalRevPS->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $totalRevPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
-			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+			  echo "<th>" . $row['EFYTOTLT'] . "</th>";
 				echo "<th>" . $row['F1A13'] . "</th>";
 				echo "<th>" . $row['F1A18'] . "</th>";
 				echo "<th>" . $row['F1B25'] . "</th>";
@@ -383,21 +388,21 @@ function getNetAssetsPS() {
 	# setting the fetch mode
 	$netAssPS->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $netAssPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
-			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+			  echo "<th>" . $row['EFYTOTLT'] . "</th>";
 				echo "<th>" . $row['F1A13'] . "</th>";
 				echo "<th>" . $row['F1A18'] . "</th>";
 				echo "<th>" . $row['F1B25'] . "</th>";
@@ -441,21 +446,21 @@ function getTotLiabPS() {
 	# setting the fetch mode
 	$totLiabPS->setFetchMode(PDO::FETCH_ASSOC);
 	echo "<table border='1'";
-			echo "
+			echo '
 			<tr>
-			  <th>Institution</th>
-			  <th>Enrollment</th>
-			  <th>Total Liabilities</th>
-			  <th>Net Assets</th>
-			  <th>Total Revenues</th>
-			  <th>Total Revenues per Student</th>
-			  <th>Net Assets per Student</th>
-			  <th>Total Liabilities per Student</th>
-			</tr>";
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getInstitution">Institution</a></th>
+			  <th><a href="http://mywebclass.org/~ak557/q9.php?f=getEnrollment">Enrollment</th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiab">Total Liabilities</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssets">Net Assets</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRev">Total Revenues</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotRevPS">Total Revenues per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getNetAssetsPS">Net Assets per Student</a></th>
+				<th><a href="http://mywebclass.org/~ak557/q9.php?f=getTotLiabPS">Total Liabilities per Student</a></th>
+			</tr>';
 	while($row = $totLiabPS->fetch()) {
 			echo "<tr>";
 				echo "<th>" . $row['INSTNM'] . "</th>";
-			    echo "<th>" . $row['EFYTOTLT'] . "</th>";
+			  echo "<th>" . $row['EFYTOTLT'] . "</th>";
 				echo "<th>" . $row['F1A13'] . "</th>";
 				echo "<th>" . $row['F1A18'] . "</th>";
 				echo "<th>" . $row['F1B25'] . "</th>";
